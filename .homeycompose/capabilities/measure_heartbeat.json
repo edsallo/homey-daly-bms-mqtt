@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Heartbeat",
+    "ru": "Счётчик BMS"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_heartbeat.svg",
+  "insights": true,
+  "decimals": 0
+}

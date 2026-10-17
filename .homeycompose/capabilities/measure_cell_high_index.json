@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Highest cell",
+    "ru": "Максимальная ячейка"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_cell_high_index.svg",
+  "insights": true,
+  "decimals": 0
+}

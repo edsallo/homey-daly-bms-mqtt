@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Cell count",
+    "ru": "Число ячеек"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_cell_count.svg",
+  "insights": true,
+  "decimals": 0
+}

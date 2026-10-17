@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Remaining energy",
+    "ru": "Остаток энергии"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_remaining_energy.svg",
+  "insights": true,
+  "units": "kWh",
+  "decimals": 2
+}

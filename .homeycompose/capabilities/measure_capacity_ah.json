@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Capacity",
+    "ru": "Ёмкость"
+  },
+  "units": {
+    "en": "Ah",
+    "ru": "Ач"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": true,
+  "icon": "/assets/capabilities/measure_capacity_ah.svg",
+  "decimals": 2
+}

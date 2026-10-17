@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Current",
+    "ru": "Ток"
+  },
+  "units": {
+    "en": "A",
+    "ru": "А"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": true,
+  "icon": "/assets/capabilities/bms_current.svg",
+  "decimals": 1
+}

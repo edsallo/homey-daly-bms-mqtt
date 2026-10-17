@@ -1,0 +1,28 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Manual relay",
+    "ru": "Ручное реле"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/relay_manual.svg",
+  "insights": true,
+  "titleTrue": {
+    "en": "On",
+    "ru": "Включено"
+  },
+  "titleFalse": {
+    "en": "Off",
+    "ru": "Выключено"
+  },
+  "insightsTitleTrue": {
+    "en": "Manual relay on",
+    "ru": "Ручное реле: включено"
+  },
+  "insightsTitleFalse": {
+    "en": "Manual relay off",
+    "ru": "Ручное реле: выключено"
+  }
+}

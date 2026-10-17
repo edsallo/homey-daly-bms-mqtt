@@ -1,0 +1,28 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Balancing",
+    "ru": "Балансировка"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/balance_active.svg",
+  "insights": true,
+  "titleTrue": {
+    "en": "On",
+    "ru": "Включено"
+  },
+  "titleFalse": {
+    "en": "Off",
+    "ru": "Выключено"
+  },
+  "insightsTitleTrue": {
+    "en": "Balancing on",
+    "ru": "Балансировка: включено"
+  },
+  "insightsTitleFalse": {
+    "en": "Balancing off",
+    "ru": "Балансировка: выключено"
+  }
+}

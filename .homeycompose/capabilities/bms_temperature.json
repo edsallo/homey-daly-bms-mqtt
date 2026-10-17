@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "BMS Temperature",
+    "ru": "Температура BMS"
+  },
+  "units": {
+    "en": "°C",
+    "ru": "°C"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": true,
+  "icon": "/assets/capabilities/bms_temperature.svg",
+  "decimals": 1
+}

@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "MOS Temperature",
+    "ru": "Температура MOS"
+  },
+  "units": {
+    "en": "°C",
+    "ru": "°C"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": true,
+  "icon": "/assets/capabilities/mos_temperature.svg",
+  "decimals": 1
+}

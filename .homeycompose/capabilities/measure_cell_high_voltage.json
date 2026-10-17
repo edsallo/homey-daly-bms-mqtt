@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Highest voltage",
+    "ru": "Макс. напряжение"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_cell_high_voltage.svg",
+  "insights": true,
+  "units": "V",
+  "decimals": 3
+}

@@ -1,0 +1,30 @@
+{
+  "errors": {
+    "connecting": "Waiting for BMS telemetry",
+    "subscription": "MQTT subscription rejected",
+    "connection": "MQTT connection error",
+    "disconnected": "MQTT connection lost",
+    "stale": "No recent BMS telemetry",
+    "bms_offline": "BMS is offline",
+    "invalid_broker": "Enter a broker hostname or IP without a protocol or path",
+    "invalid_port": "Port must be an integer from 1 to 65535",
+    "invalid_topic": "Enter a topic without + or # wildcards",
+    "invalid_threshold": "Battery threshold must be between 0 and 100",
+    "invalid_timeout": "Telemetry timeout must be 0–86400 seconds"
+  },
+  "values": {
+    "no_failure": "No errors"
+  },
+  "pair": {
+    "title": "Connect Daly BMS",
+    "name": "Device name",
+    "broker": "MQTT broker IP or hostname",
+    "port": "MQTT port",
+    "topic": "Base topic",
+    "user": "MQTT username",
+    "password": "MQTT password",
+    "tls": "Use TLS",
+    "add": "Add device",
+    "failed": "Could not add device"
+  }
+}

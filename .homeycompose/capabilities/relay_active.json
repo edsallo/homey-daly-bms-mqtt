@@ -1,0 +1,28 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Relay",
+    "ru": "Реле"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/relay_active.svg",
+  "insights": true,
+  "titleTrue": {
+    "en": "On",
+    "ru": "Включено"
+  },
+  "titleFalse": {
+    "en": "Off",
+    "ru": "Выключено"
+  },
+  "insightsTitleTrue": {
+    "en": "Relay on",
+    "ru": "Реле: включено"
+  },
+  "insightsTitleFalse": {
+    "en": "Relay off",
+    "ru": "Реле: выключено"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "BMS mode",
+    "ru": "Режим BMS"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_status_code.svg",
+  "insights": true,
+  "decimals": 0
+}

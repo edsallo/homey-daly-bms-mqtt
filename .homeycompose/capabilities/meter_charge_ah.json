@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Charged total",
+    "ru": "Всего заряжено"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/meter_charge_ah.svg",
+  "insights": true,
+  "units": "Ah",
+  "decimals": 2
+}

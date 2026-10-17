@@ -1,0 +1,8 @@
+{
+  "type": "string",
+  "title": {"en": "BMS Status", "ru": "Статус BMS"},
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_status.svg"
+}

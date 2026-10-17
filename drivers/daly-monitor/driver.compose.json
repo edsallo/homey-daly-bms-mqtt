@@ -1,0 +1,351 @@
+{
+  "id": "daly-monitor",
+  "name": {
+    "en": "Daly BMS",
+    "ru": "Daly BMS"
+  },
+  "class": "battery",
+  "energy": {
+    "batteries": [
+      "INTERNAL"
+    ]
+  },
+  "capabilities": [
+    "measure_status",
+    "bms_voltage",
+    "measure_capacity_ah",
+    "bms_current",
+    "measure_battery",
+    "measure_delta",
+    "measure_balancing_current",
+    "bms_temperature",
+    "mos_temperature",
+    "alarm_battery",
+    "measure_power",
+    "charge_fet",
+    "discharge_fet",
+    "balance_active",
+    "relay_active",
+    "relay_manual",
+    "meter_discharge_ah",
+    "meter_charge_ah",
+    "measure_cycles",
+    "measure_remaining_energy",
+    "measure_cell_count",
+    "measure_heartbeat",
+    "measure_cell_high_index",
+    "measure_cell_low_index",
+    "measure_cell_high_voltage",
+    "measure_cell_low_voltage",
+    "measure_wifi_rssi",
+    "measure_status_code",
+    "bms_failure",
+    "alarm_generic"
+  ],
+  "pair": [
+    {
+      "id": "manual"
+    }
+  ],
+  "settings": [
+    {
+      "id": "mqttBroker",
+      "type": "text",
+      "label": {
+        "en": "MQTT Broker IP",
+        "ru": "IP брокера MQTT"
+      },
+      "value": ""
+    },
+    {
+      "id": "mqttPort",
+      "type": "number",
+      "label": {
+        "en": "MQTT Port",
+        "ru": "Порт MQTT"
+      },
+      "value": 1883,
+      "min": 1,
+      "max": 65535
+    },
+    {
+      "id": "mqttTopic",
+      "type": "text",
+      "label": {
+        "en": "MQTT Topic",
+        "ru": "Топик MQTT"
+      },
+      "value": "BMS01"
+    },
+    {
+      "id": "mqttUser",
+      "type": "text",
+      "label": {
+        "en": "MQTT Username",
+        "ru": "Имя пользователя MQTT"
+      },
+      "value": ""
+    },
+    {
+      "id": "mqttPassword",
+      "type": "password",
+      "label": {
+        "en": "MQTT Password",
+        "ru": "Пароль MQTT"
+      },
+      "value": ""
+    },
+    {
+      "id": "mqttTls",
+      "type": "checkbox",
+      "label": {
+        "en": "Use TLS (mqtts)",
+        "ru": "Защищённое соединение TLS"
+      },
+      "value": false
+    },
+    {
+      "id": "lowBattery",
+      "type": "number",
+      "label": {
+        "en": "Low battery threshold (%)",
+        "ru": "Порог низкого заряда (%)"
+      },
+      "value": 20,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "telemetryTimeout",
+      "type": "number",
+      "label": {
+        "en": "Telemetry timeout (seconds, 0 = off)",
+        "ru": "Тайм-аут данных (сек., 0 = выключен)"
+      },
+      "value": 300,
+      "min": 0,
+      "max": 86400
+    }
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "platforms": [
+    "local"
+  ],
+  "images": {
+    "small": "/drivers/daly-monitor/assets/images/small.png",
+    "large": "/drivers/daly-monitor/assets/images/large.png",
+    "xlarge": "/drivers/daly-monitor/assets/images/xlarge.png"
+  },
+  "capabilitiesOptions": {
+    "bms_voltage": {
+      "preventInsights": false,
+      "title": {
+        "en": "Voltage BMS",
+        "ru": "Напряжение BMS"
+      }
+    },
+    "measure_capacity_ah": {
+      "preventInsights": false,
+      "title": {
+        "en": "Capacity BMS",
+        "ru": "Ёмкость BMS"
+      }
+    },
+    "bms_current": {
+      "preventInsights": false,
+      "title": {
+        "en": "Current BMS",
+        "ru": "Ток BMS"
+      }
+    },
+    "measure_battery": {
+      "preventInsights": false,
+      "title": {
+        "en": "Charge BMS",
+        "ru": "Заряд BMS"
+      }
+    },
+    "measure_delta": {
+      "preventInsights": false,
+      "title": {
+        "en": "Cell Delta BMS",
+        "ru": "Дельта ячеек BMS"
+      }
+    },
+    "measure_balancing_current": {
+      "preventInsights": false,
+      "title": {
+        "en": "Balancing Current BMS",
+        "ru": "Ток балансировки BMS"
+      }
+    },
+    "bms_temperature": {
+      "preventInsights": false,
+      "title": {
+        "en": "BMS Temperature",
+        "ru": "Температура BMS"
+      }
+    },
+    "mos_temperature": {
+      "preventInsights": false,
+      "title": {
+        "en": "MOS Temperature BMS",
+        "ru": "Температура MOS BMS"
+      }
+    },
+    "alarm_battery": {
+      "preventInsights": false,
+      "title": {
+        "en": "Low charge BMS",
+        "ru": "Низкий заряд BMS"
+      }
+    },
+    "measure_power": {
+      "preventInsights": false,
+      "title": {
+        "en": "Power BMS",
+        "ru": "Мощность BMS"
+      }
+    },
+    "charge_fet": {
+      "preventInsights": false,
+      "title": {
+        "en": "Charge FET BMS",
+        "ru": "Зарядный FET BMS"
+      }
+    },
+    "discharge_fet": {
+      "preventInsights": false,
+      "title": {
+        "en": "Discharge FET BMS",
+        "ru": "Разрядный FET BMS"
+      }
+    },
+    "balance_active": {
+      "preventInsights": false,
+      "title": {
+        "en": "Balancing BMS",
+        "ru": "Балансировка BMS"
+      }
+    },
+    "relay_active": {
+      "preventInsights": true,
+      "title": {
+        "en": "Relay BMS",
+        "ru": "Реле BMS"
+      }
+    },
+    "relay_manual": {
+      "preventInsights": true,
+      "title": {
+        "en": "Manual relay BMS",
+        "ru": "Ручное реле BMS"
+      }
+    },
+    "meter_discharge_ah": {
+      "preventInsights": false,
+      "title": {
+        "en": "Discharged total BMS",
+        "ru": "Всего разряжено BMS"
+      }
+    },
+    "meter_charge_ah": {
+      "preventInsights": false,
+      "title": {
+        "en": "Charged total BMS",
+        "ru": "Всего заряжено BMS"
+      }
+    },
+    "measure_cycles": {
+      "preventInsights": false,
+      "title": {
+        "en": "Cycles BMS",
+        "ru": "Циклы BMS"
+      }
+    },
+    "measure_remaining_energy": {
+      "preventInsights": false,
+      "title": {
+        "en": "Remaining energy BMS",
+        "ru": "Остаток энергии BMS"
+      }
+    },
+    "measure_cell_count": {
+      "preventInsights": true,
+      "title": {
+        "en": "Cell count BMS",
+        "ru": "Число ячеек BMS"
+      }
+    },
+    "measure_heartbeat": {
+      "preventInsights": true,
+      "title": {
+        "en": "Heartbeat BMS",
+        "ru": "Счётчик BMS"
+      }
+    },
+    "measure_cell_high_index": {
+      "preventInsights": true,
+      "title": {
+        "en": "Highest cell BMS",
+        "ru": "Максимальная ячейка BMS"
+      }
+    },
+    "measure_cell_low_index": {
+      "preventInsights": true,
+      "title": {
+        "en": "Lowest cell BMS",
+        "ru": "Минимальная ячейка BMS"
+      }
+    },
+    "measure_cell_high_voltage": {
+      "preventInsights": false,
+      "title": {
+        "en": "Highest voltage BMS",
+        "ru": "Макс. напряжение BMS"
+      }
+    },
+    "measure_cell_low_voltage": {
+      "preventInsights": false,
+      "title": {
+        "en": "Lowest voltage BMS",
+        "ru": "Мин. напряжение BMS"
+      }
+    },
+    "measure_wifi_rssi": {
+      "preventInsights": false,
+      "title": {
+        "en": "Wi-Fi signal BMS",
+        "ru": "Сигнал Wi-Fi BMS"
+      }
+    },
+    "measure_status_code": {
+      "preventInsights": true,
+      "title": {
+        "en": "BMS mode",
+        "ru": "Режим BMS"
+      }
+    },
+    "alarm_generic": {
+      "preventInsights": false,
+      "title": {
+        "en": "Alarm BMS",
+        "ru": "Авария BMS"
+      }
+    },
+    "measure_status": {
+      "title": {
+        "en": "BMS Status",
+        "ru": "Статус BMS"
+      }
+    },
+    "bms_failure": {
+      "title": {
+        "en": "BMS errors",
+        "ru": "Ошибки BMS"
+      }
+    }
+  }
+}

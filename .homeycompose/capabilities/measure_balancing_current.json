@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Balancing Current",
+    "ru": "Ток балансировки"
+  },
+  "units": {
+    "en": "mA",
+    "ru": "мА"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": true,
+  "icon": "/assets/capabilities/measure_balancing_current.svg",
+  "decimals": 1
+}

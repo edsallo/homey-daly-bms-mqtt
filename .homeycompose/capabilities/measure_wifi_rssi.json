@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Wi-Fi signal",
+    "ru": "Сигнал Wi-Fi"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_wifi_rssi.svg",
+  "insights": true,
+  "units": "dBm",
+  "decimals": 0
+}

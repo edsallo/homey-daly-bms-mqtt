@@ -1,0 +1,38 @@
+<style>
+  .daly-fields { display: grid; gap: 12px; }
+  .daly-fields label { display: block; margin-bottom: 4px; }
+</style>
+<header class="homey-header"><h1 class="homey-title" data-i18n="pair.title"></h1></header>
+<form id="connection" class="homey-form daly-fields">
+  <div><label for="name" data-i18n="pair.name"></label><input class="homey-form-input" id="name" value="Daly BMS" maxlength="100" required></div>
+  <div><label for="broker" data-i18n="pair.broker"></label><input class="homey-form-input" id="broker" type="text" inputmode="url" placeholder="192.168.1.100" autocapitalize="none" autocomplete="off" spellcheck="false" required></div>
+  <div><label for="port" data-i18n="pair.port"></label><input class="homey-form-input" id="port" type="number" min="1" max="65535" step="1" value="1883" required></div>
+  <div><label for="topic" data-i18n="pair.topic"></label><input class="homey-form-input" id="topic" value="BMS01" autocapitalize="none" spellcheck="false" required></div>
+  <div><label for="user" data-i18n="pair.user"></label><input class="homey-form-input" id="user" autocapitalize="none" autocomplete="off"></div>
+  <div><label for="password" data-i18n="pair.password"></label><input class="homey-form-input" id="password" type="password" autocomplete="new-password"></div>
+  <label><input id="tls" type="checkbox"> <span data-i18n="pair.tls"></span></label>
+  <button id="add" class="homey-button-primary-full" type="submit" data-i18n="pair.add"></button>
+</form>
+<script>
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = Homey.__(el.dataset.i18n); });
+  document.getElementById('connection').addEventListener('submit', async event => {
+    event.preventDefault();
+    const button = document.getElementById('add');
+    if (button.disabled) return;
+    button.disabled = true;
+    const value = id => document.getElementById(id).value;
+    try {
+      const device = await Homey.emit('validate_connection', {
+        name: value('name'),
+        settings: { mqttBroker: value('broker'), mqttPort: Number(value('port')),
+          mqttTopic: value('topic'), mqttUser: value('user'), mqttPassword: value('password'),
+          mqttTls: document.getElementById('tls').checked, lowBattery: 20, telemetryTimeout: 300 },
+      });
+      await Homey.createDevice(device);
+      await Homey.done();
+    } catch (error) {
+      Homey.alert(error.message || Homey.__('pair.failed'));
+      button.disabled = false;
+    }
+  });
+</script>

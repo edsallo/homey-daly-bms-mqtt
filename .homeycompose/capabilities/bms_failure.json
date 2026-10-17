@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "title": {
+    "en": "BMS errors",
+    "ru": "Ошибки BMS"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/bms_failure.svg"
+}

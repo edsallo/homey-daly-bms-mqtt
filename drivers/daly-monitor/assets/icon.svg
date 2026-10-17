@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="960" viewBox="0 0 960 960">
+  <g transform="translate(-48.16 -23.72) scale(1.08676)">
+  <g fill="none" stroke="#000" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M127 291H817Q832 291 832 307V621Q832 637 817 637H127Q114 637 114 623V305Q114 291 127 291Z"/>
+    <path d="M114 309H91Q56 309 56 346V594Q56 625 91 625H114M832 378H845Q864 378 864 403V543Q864 568 845 568H832"/>
+    <path d="M832 306H887Q908 306 908 327V345Q908 366 887 366H832M832 574H895Q916 574 916 595V613Q916 634 895 634H832"/>
+    <circle cx="877" cy="336" r="19"/>
+    <circle cx="885" cy="604" r="19"/>
+    <path d="M112 310H91V326H78M113 516H88V528H97V611H79"/>
+    <path stroke-width="12" d="M57 385H78M57 408H78M57 431H78M57 454H78M57 477H78M57 500H78M56 545H77M56 568H77M840 439H861M840 463H861M840 487H861M840 511H861"/>
+    <circle cx="78" cy="358" r="9"/>
+    <circle cx="77" cy="590" r="9"/>
+    <circle cx="848" cy="411" r="8"/>
+    <circle cx="848" cy="544" r="8"/>
+    <circle cx="151" cy="359" r="8"/>
+    <rect x="494" y="354" width="229" height="163" rx="10" stroke-width="12"/>
+    <path stroke-width="10" d="M515 388H701M515 419H653M515 449H653M515 485H701"/>
+  </g>
+  <g fill="#000">
+    <!-- Two interlocking, rounded forms echo the mark visible on the housing. -->
+    <path d="M305 382C269 358 225 377 215 414C202 456 225 493 263 496C289 500 311 483 319 460C324 445 315 433 301 435C284 437 280 456 264 457C244 458 233 442 239 425C246 407 271 402 287 390Z"/>
+    <path d="M305 490C341 514 385 495 395 458C408 416 385 379 347 376C321 372 299 389 291 412C286 427 295 439 309 437C326 435 330 416 346 415C366 414 377 430 371 447C364 465 339 470 323 482Z"/>
+  </g>
+  </g>
+</svg>

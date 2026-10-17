@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Cycles",
+    "ru": "Циклы"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_cycles.svg",
+  "insights": true,
+  "decimals": 0
+}

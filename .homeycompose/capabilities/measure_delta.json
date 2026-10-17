@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Cell Delta",
+    "ru": "Дельта ячеек"
+  },
+  "units": {
+    "en": "mV",
+    "ru": "мВ"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": true,
+  "icon": "/assets/capabilities/measure_delta.svg",
+  "decimals": 0
+}

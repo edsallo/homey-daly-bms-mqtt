@@ -1,0 +1,830 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.daly.bms",
+  "version": "1.1.3",
+  "compatibility": ">=12.0.0",
+  "sdk": 3,
+  "name": {
+    "en": "Daly BMS",
+    "ru": "Daly BMS"
+  },
+  "description": {
+    "en": "Monitor Daly battery telemetry over MQTT",
+    "ru": "Мониторинг аккумуляторов Daly через MQTT"
+  },
+  "category": [
+    "energy"
+  ],
+  "permissions": [],
+  "author": {
+    "name": "Eduard Sallo",
+    "email": "ed.sallo@gmail.com"
+  },
+  "platforms": [
+    "local"
+  ],
+  "brandColor": "#C62828",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "drivers": [
+    {
+      "id": "daly-monitor",
+      "name": {
+        "en": "Daly BMS",
+        "ru": "Daly BMS"
+      },
+      "class": "battery",
+      "energy": {
+        "batteries": [
+          "INTERNAL"
+        ]
+      },
+      "capabilities": [
+        "measure_status",
+        "bms_voltage",
+        "measure_capacity_ah",
+        "bms_current",
+        "measure_battery",
+        "measure_delta",
+        "measure_balancing_current",
+        "bms_temperature",
+        "mos_temperature",
+        "alarm_battery",
+        "measure_power",
+        "charge_fet",
+        "discharge_fet",
+        "balance_active",
+        "relay_active",
+        "relay_manual",
+        "meter_discharge_ah",
+        "meter_charge_ah",
+        "measure_cycles",
+        "measure_remaining_energy",
+        "measure_cell_count",
+        "measure_heartbeat",
+        "measure_cell_high_index",
+        "measure_cell_low_index",
+        "measure_cell_high_voltage",
+        "measure_cell_low_voltage",
+        "measure_wifi_rssi",
+        "measure_status_code",
+        "bms_failure",
+        "alarm_generic"
+      ],
+      "pair": [
+        {
+          "id": "manual"
+        }
+      ],
+      "settings": [
+        {
+          "id": "mqttBroker",
+          "type": "text",
+          "label": {
+            "en": "MQTT Broker IP",
+            "ru": "IP брокера MQTT"
+          },
+          "value": ""
+        },
+        {
+          "id": "mqttPort",
+          "type": "number",
+          "label": {
+            "en": "MQTT Port",
+            "ru": "Порт MQTT"
+          },
+          "value": 1883,
+          "min": 1,
+          "max": 65535
+        },
+        {
+          "id": "mqttTopic",
+          "type": "text",
+          "label": {
+            "en": "MQTT Topic",
+            "ru": "Топик MQTT"
+          },
+          "value": "BMS01"
+        },
+        {
+          "id": "mqttUser",
+          "type": "text",
+          "label": {
+            "en": "MQTT Username",
+            "ru": "Имя пользователя MQTT"
+          },
+          "value": ""
+        },
+        {
+          "id": "mqttPassword",
+          "type": "password",
+          "label": {
+            "en": "MQTT Password",
+            "ru": "Пароль MQTT"
+          },
+          "value": ""
+        },
+        {
+          "id": "mqttTls",
+          "type": "checkbox",
+          "label": {
+            "en": "Use TLS (mqtts)",
+            "ru": "Защищённое соединение TLS"
+          },
+          "value": false
+        },
+        {
+          "id": "lowBattery",
+          "type": "number",
+          "label": {
+            "en": "Low battery threshold (%)",
+            "ru": "Порог низкого заряда (%)"
+          },
+          "value": 20,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "telemetryTimeout",
+          "type": "number",
+          "label": {
+            "en": "Telemetry timeout (seconds, 0 = off)",
+            "ru": "Тайм-аут данных (сек., 0 = выключен)"
+          },
+          "value": 300,
+          "min": 0,
+          "max": 86400
+        }
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "images": {
+        "small": "/drivers/daly-monitor/assets/images/small.png",
+        "large": "/drivers/daly-monitor/assets/images/large.png",
+        "xlarge": "/drivers/daly-monitor/assets/images/xlarge.png"
+      },
+      "capabilitiesOptions": {
+        "bms_voltage": {
+          "preventInsights": false,
+          "title": {
+            "en": "Voltage BMS",
+            "ru": "Напряжение BMS"
+          }
+        },
+        "measure_capacity_ah": {
+          "preventInsights": false,
+          "title": {
+            "en": "Capacity BMS",
+            "ru": "Ёмкость BMS"
+          }
+        },
+        "bms_current": {
+          "preventInsights": false,
+          "title": {
+            "en": "Current BMS",
+            "ru": "Ток BMS"
+          }
+        },
+        "measure_battery": {
+          "preventInsights": false,
+          "title": {
+            "en": "Charge BMS",
+            "ru": "Заряд BMS"
+          }
+        },
+        "measure_delta": {
+          "preventInsights": false,
+          "title": {
+            "en": "Cell Delta BMS",
+            "ru": "Дельта ячеек BMS"
+          }
+        },
+        "measure_balancing_current": {
+          "preventInsights": false,
+          "title": {
+            "en": "Balancing Current BMS",
+            "ru": "Ток балансировки BMS"
+          }
+        },
+        "bms_temperature": {
+          "preventInsights": false,
+          "title": {
+            "en": "BMS Temperature",
+            "ru": "Температура BMS"
+          }
+        },
+        "mos_temperature": {
+          "preventInsights": false,
+          "title": {
+            "en": "MOS Temperature BMS",
+            "ru": "Температура MOS BMS"
+          }
+        },
+        "alarm_battery": {
+          "preventInsights": false,
+          "title": {
+            "en": "Low charge BMS",
+            "ru": "Низкий заряд BMS"
+          }
+        },
+        "measure_power": {
+          "preventInsights": false,
+          "title": {
+            "en": "Power BMS",
+            "ru": "Мощность BMS"
+          }
+        },
+        "charge_fet": {
+          "preventInsights": false,
+          "title": {
+            "en": "Charge FET BMS",
+            "ru": "Зарядный FET BMS"
+          }
+        },
+        "discharge_fet": {
+          "preventInsights": false,
+          "title": {
+            "en": "Discharge FET BMS",
+            "ru": "Разрядный FET BMS"
+          }
+        },
+        "balance_active": {
+          "preventInsights": false,
+          "title": {
+            "en": "Balancing BMS",
+            "ru": "Балансировка BMS"
+          }
+        },
+        "relay_active": {
+          "preventInsights": true,
+          "title": {
+            "en": "Relay BMS",
+            "ru": "Реле BMS"
+          }
+        },
+        "relay_manual": {
+          "preventInsights": true,
+          "title": {
+            "en": "Manual relay BMS",
+            "ru": "Ручное реле BMS"
+          }
+        },
+        "meter_discharge_ah": {
+          "preventInsights": false,
+          "title": {
+            "en": "Discharged total BMS",
+            "ru": "Всего разряжено BMS"
+          }
+        },
+        "meter_charge_ah": {
+          "preventInsights": false,
+          "title": {
+            "en": "Charged total BMS",
+            "ru": "Всего заряжено BMS"
+          }
+        },
+        "measure_cycles": {
+          "preventInsights": false,
+          "title": {
+            "en": "Cycles BMS",
+            "ru": "Циклы BMS"
+          }
+        },
+        "measure_remaining_energy": {
+          "preventInsights": false,
+          "title": {
+            "en": "Remaining energy BMS",
+            "ru": "Остаток энергии BMS"
+          }
+        },
+        "measure_cell_count": {
+          "preventInsights": true,
+          "title": {
+            "en": "Cell count BMS",
+            "ru": "Число ячеек BMS"
+          }
+        },
+        "measure_heartbeat": {
+          "preventInsights": true,
+          "title": {
+            "en": "Heartbeat BMS",
+            "ru": "Счётчик BMS"
+          }
+        },
+        "measure_cell_high_index": {
+          "preventInsights": true,
+          "title": {
+            "en": "Highest cell BMS",
+            "ru": "Максимальная ячейка BMS"
+          }
+        },
+        "measure_cell_low_index": {
+          "preventInsights": true,
+          "title": {
+            "en": "Lowest cell BMS",
+            "ru": "Минимальная ячейка BMS"
+          }
+        },
+        "measure_cell_high_voltage": {
+          "preventInsights": false,
+          "title": {
+            "en": "Highest voltage BMS",
+            "ru": "Макс. напряжение BMS"
+          }
+        },
+        "measure_cell_low_voltage": {
+          "preventInsights": false,
+          "title": {
+            "en": "Lowest voltage BMS",
+            "ru": "Мин. напряжение BMS"
+          }
+        },
+        "measure_wifi_rssi": {
+          "preventInsights": false,
+          "title": {
+            "en": "Wi-Fi signal BMS",
+            "ru": "Сигнал Wi-Fi BMS"
+          }
+        },
+        "measure_status_code": {
+          "preventInsights": true,
+          "title": {
+            "en": "BMS mode",
+            "ru": "Режим BMS"
+          }
+        },
+        "alarm_generic": {
+          "preventInsights": false,
+          "title": {
+            "en": "Alarm BMS",
+            "ru": "Авария BMS"
+          }
+        },
+        "measure_status": {
+          "title": {
+            "en": "BMS Status",
+            "ru": "Статус BMS"
+          }
+        },
+        "bms_failure": {
+          "title": {
+            "en": "BMS errors",
+            "ru": "Ошибки BMS"
+          }
+        }
+      }
+    }
+  ],
+  "capabilities": {
+    "balance_active": {
+      "type": "boolean",
+      "title": {
+        "en": "Balancing",
+        "ru": "Балансировка"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/balance_active.svg",
+      "insights": true,
+      "titleTrue": {
+        "en": "On",
+        "ru": "Включено"
+      },
+      "titleFalse": {
+        "en": "Off",
+        "ru": "Выключено"
+      },
+      "insightsTitleTrue": {
+        "en": "Balancing on",
+        "ru": "Балансировка: включено"
+      },
+      "insightsTitleFalse": {
+        "en": "Balancing off",
+        "ru": "Балансировка: выключено"
+      }
+    },
+    "bms_current": {
+      "type": "number",
+      "title": {
+        "en": "Current",
+        "ru": "Ток"
+      },
+      "units": {
+        "en": "A",
+        "ru": "А"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "icon": "/assets/capabilities/bms_current.svg",
+      "decimals": 1
+    },
+    "bms_failure": {
+      "type": "string",
+      "title": {
+        "en": "BMS errors",
+        "ru": "Ошибки BMS"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/bms_failure.svg"
+    },
+    "bms_temperature": {
+      "type": "number",
+      "title": {
+        "en": "BMS Temperature",
+        "ru": "Температура BMS"
+      },
+      "units": {
+        "en": "°C",
+        "ru": "°C"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "icon": "/assets/capabilities/bms_temperature.svg",
+      "decimals": 1
+    },
+    "bms_voltage": {
+      "type": "number",
+      "title": {
+        "en": "Voltage",
+        "ru": "Напряжение"
+      },
+      "units": {
+        "en": "V",
+        "ru": "В"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "icon": "/assets/capabilities/bms_voltage.svg",
+      "decimals": 2
+    },
+    "charge_fet": {
+      "type": "boolean",
+      "title": {
+        "en": "Charge FET",
+        "ru": "Зарядный FET"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/charge_fet.svg",
+      "insights": true,
+      "titleTrue": {
+        "en": "On",
+        "ru": "Включено"
+      },
+      "titleFalse": {
+        "en": "Off",
+        "ru": "Выключено"
+      },
+      "insightsTitleTrue": {
+        "en": "Charge FET on",
+        "ru": "Зарядный FET: включено"
+      },
+      "insightsTitleFalse": {
+        "en": "Charge FET off",
+        "ru": "Зарядный FET: выключено"
+      }
+    },
+    "discharge_fet": {
+      "type": "boolean",
+      "title": {
+        "en": "Discharge FET",
+        "ru": "Разрядный FET"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/discharge_fet.svg",
+      "insights": true,
+      "titleTrue": {
+        "en": "On",
+        "ru": "Включено"
+      },
+      "titleFalse": {
+        "en": "Off",
+        "ru": "Выключено"
+      },
+      "insightsTitleTrue": {
+        "en": "Discharge FET on",
+        "ru": "Разрядный FET: включено"
+      },
+      "insightsTitleFalse": {
+        "en": "Discharge FET off",
+        "ru": "Разрядный FET: выключено"
+      }
+    },
+    "measure_balancing_current": {
+      "type": "number",
+      "title": {
+        "en": "Balancing Current",
+        "ru": "Ток балансировки"
+      },
+      "units": {
+        "en": "mA",
+        "ru": "мА"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "icon": "/assets/capabilities/measure_balancing_current.svg",
+      "decimals": 1
+    },
+    "measure_capacity_ah": {
+      "type": "number",
+      "title": {
+        "en": "Capacity",
+        "ru": "Ёмкость"
+      },
+      "units": {
+        "en": "Ah",
+        "ru": "Ач"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "icon": "/assets/capabilities/measure_capacity_ah.svg",
+      "decimals": 2
+    },
+    "measure_cell_count": {
+      "type": "number",
+      "title": {
+        "en": "Cell count",
+        "ru": "Число ячеек"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_cell_count.svg",
+      "insights": true,
+      "decimals": 0
+    },
+    "measure_cell_high_index": {
+      "type": "number",
+      "title": {
+        "en": "Highest cell",
+        "ru": "Максимальная ячейка"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_cell_high_index.svg",
+      "insights": true,
+      "decimals": 0
+    },
+    "measure_cell_high_voltage": {
+      "type": "number",
+      "title": {
+        "en": "Highest voltage",
+        "ru": "Макс. напряжение"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_cell_high_voltage.svg",
+      "insights": true,
+      "units": "V",
+      "decimals": 3
+    },
+    "measure_cell_low_index": {
+      "type": "number",
+      "title": {
+        "en": "Lowest cell",
+        "ru": "Минимальная ячейка"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_cell_low_index.svg",
+      "insights": true,
+      "decimals": 0
+    },
+    "measure_cell_low_voltage": {
+      "type": "number",
+      "title": {
+        "en": "Lowest voltage",
+        "ru": "Мин. напряжение"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_cell_low_voltage.svg",
+      "insights": true,
+      "units": "V",
+      "decimals": 3
+    },
+    "measure_cycles": {
+      "type": "number",
+      "title": {
+        "en": "Cycles",
+        "ru": "Циклы"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_cycles.svg",
+      "insights": true,
+      "decimals": 0
+    },
+    "measure_delta": {
+      "type": "number",
+      "title": {
+        "en": "Cell Delta",
+        "ru": "Дельта ячеек"
+      },
+      "units": {
+        "en": "mV",
+        "ru": "мВ"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "icon": "/assets/capabilities/measure_delta.svg",
+      "decimals": 0
+    },
+    "measure_heartbeat": {
+      "type": "number",
+      "title": {
+        "en": "Heartbeat",
+        "ru": "Счётчик BMS"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_heartbeat.svg",
+      "insights": true,
+      "decimals": 0
+    },
+    "measure_remaining_energy": {
+      "type": "number",
+      "title": {
+        "en": "Remaining energy",
+        "ru": "Остаток энергии"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_remaining_energy.svg",
+      "insights": true,
+      "units": "kWh",
+      "decimals": 2
+    },
+    "measure_status": {
+      "type": "string",
+      "title": {
+        "en": "BMS Status",
+        "ru": "Статус BMS"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_status.svg"
+    },
+    "measure_status_code": {
+      "type": "number",
+      "title": {
+        "en": "BMS mode",
+        "ru": "Режим BMS"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_status_code.svg",
+      "insights": true,
+      "decimals": 0
+    },
+    "measure_wifi_rssi": {
+      "type": "number",
+      "title": {
+        "en": "Wi-Fi signal",
+        "ru": "Сигнал Wi-Fi"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_wifi_rssi.svg",
+      "insights": true,
+      "units": "dBm",
+      "decimals": 0
+    },
+    "meter_charge_ah": {
+      "type": "number",
+      "title": {
+        "en": "Charged total",
+        "ru": "Всего заряжено"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/meter_charge_ah.svg",
+      "insights": true,
+      "units": "Ah",
+      "decimals": 2
+    },
+    "meter_discharge_ah": {
+      "type": "number",
+      "title": {
+        "en": "Discharged total",
+        "ru": "Всего разряжено"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/meter_discharge_ah.svg",
+      "insights": true,
+      "units": "Ah",
+      "decimals": 2
+    },
+    "mos_temperature": {
+      "type": "number",
+      "title": {
+        "en": "MOS Temperature",
+        "ru": "Температура MOS"
+      },
+      "units": {
+        "en": "°C",
+        "ru": "°C"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "icon": "/assets/capabilities/mos_temperature.svg",
+      "decimals": 1
+    },
+    "relay_active": {
+      "type": "boolean",
+      "title": {
+        "en": "Relay",
+        "ru": "Реле"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/relay_active.svg",
+      "insights": true,
+      "titleTrue": {
+        "en": "On",
+        "ru": "Включено"
+      },
+      "titleFalse": {
+        "en": "Off",
+        "ru": "Выключено"
+      },
+      "insightsTitleTrue": {
+        "en": "Relay on",
+        "ru": "Реле: включено"
+      },
+      "insightsTitleFalse": {
+        "en": "Relay off",
+        "ru": "Реле: выключено"
+      }
+    },
+    "relay_manual": {
+      "type": "boolean",
+      "title": {
+        "en": "Manual relay",
+        "ru": "Ручное реле"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/relay_manual.svg",
+      "insights": true,
+      "titleTrue": {
+        "en": "On",
+        "ru": "Включено"
+      },
+      "titleFalse": {
+        "en": "Off",
+        "ru": "Выключено"
+      },
+      "insightsTitleTrue": {
+        "en": "Manual relay on",
+        "ru": "Ручное реле: включено"
+      },
+      "insightsTitleFalse": {
+        "en": "Manual relay off",
+        "ru": "Ручное реле: выключено"
+      }
+    }
+  }
+}

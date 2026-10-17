@@ -1,0 +1,28 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Charge FET",
+    "ru": "Зарядный FET"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/charge_fet.svg",
+  "insights": true,
+  "titleTrue": {
+    "en": "On",
+    "ru": "Включено"
+  },
+  "titleFalse": {
+    "en": "Off",
+    "ru": "Выключено"
+  },
+  "insightsTitleTrue": {
+    "en": "Charge FET on",
+    "ru": "Зарядный FET: включено"
+  },
+  "insightsTitleFalse": {
+    "en": "Charge FET off",
+    "ru": "Зарядный FET: выключено"
+  }
+}

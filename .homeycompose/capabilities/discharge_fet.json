@@ -1,0 +1,28 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Discharge FET",
+    "ru": "Разрядный FET"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/discharge_fet.svg",
+  "insights": true,
+  "titleTrue": {
+    "en": "On",
+    "ru": "Включено"
+  },
+  "titleFalse": {
+    "en": "Off",
+    "ru": "Выключено"
+  },
+  "insightsTitleTrue": {
+    "en": "Discharge FET on",
+    "ru": "Разрядный FET: включено"
+  },
+  "insightsTitleFalse": {
+    "en": "Discharge FET off",
+    "ru": "Разрядный FET: выключено"
+  }
+}

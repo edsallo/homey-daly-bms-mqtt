@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Lowest voltage",
+    "ru": "Мин. напряжение"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_cell_low_voltage.svg",
+  "insights": true,
+  "units": "V",
+  "decimals": 3
+}
