@@ -134,9 +134,9 @@
     "local"
   ],
   "images": {
-    "small": "/drivers/daly-monitor/assets/images/small.png",
-    "large": "/drivers/daly-monitor/assets/images/large.png",
-    "xlarge": "/drivers/daly-monitor/assets/images/xlarge.png"
+    "small": "/drivers/daly-monitor/assets/images/small.jpg",
+    "large": "/drivers/daly-monitor/assets/images/large.jpg",
+    "xlarge": "/drivers/daly-monitor/assets/images/xlarge.jpg"
   },
   "capabilitiesOptions": {
     "bms_voltage": {

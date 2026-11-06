@@ -38,7 +38,7 @@ function device() {
   } };
   const context = { module: { exports: {} }, require(id) {
     if (id === 'homey') return { Device };
-    if (id === 'mqtt') return mqtt;
+    if (id === 'mqtt' || id === 'mqtt/lib/connect') return mqtt;
     if (id === '../../lib/telemetry') return require('../lib/telemetry');
     if (id === '../../app.json') return { drivers: [manifest] };
     return require(id);
@@ -102,4 +102,42 @@ test('topic change resubscribes and stale client events cannot overwrite availab
   clients[1].emit('message', 'BMS02/Pack_Status', Buffer.from('Offline'), { retain: false }); await d._queue;
   assert.equal(d.available, false);
   await d.onDeleted(); assert.equal(clients[1].ended, true);
+});
+
+test('availability is written once for repeated live telemetry, and restored after disconnect', async () => {
+  const {instance: d, clients} = device();
+  await d.onInit();
+  let writes = 0;
+  d.setAvailable = async () => { writes++; d.available = true; };
+  const send = async () => {
+    clients[0].emit('message', 'BMS01/Pack_Voltage', Buffer.from('26.7'), {retain:false});
+    await d._queue;
+  };
+  await send(); await send();
+  assert.equal(writes, 1);
+  clients[0].emit('close');
+  await new Promise(resolve => setImmediate(resolve));
+  await send();
+  assert.equal(writes, 2);
+  await d.onDeleted();
+});
+
+test('MQTT backpressure waits for Homey writes without dropping packets', async () => {
+  const {instance: d, clients} = device();
+  await d.onInit();
+  let release;
+  d.handleTelemetry = () => new Promise(resolve => { release = resolve; });
+  clients[0].emit('message', 'BMS01/Pack_Voltage', Buffer.from('26.7'), {retain:false});
+  let finished = false;
+  clients[0].handleMessage({}, () => { finished = true; });
+  await Promise.resolve();
+  assert.equal(finished, false);
+  release(true);
+  await d._queue;
+  await Promise.resolve();
+  assert.equal(finished, true);
+  const queue = d._queue;
+  clients[0].emit('message', 'BMS01/Unknown_JSON', Buffer.from('{}'), {});
+  assert.equal(d._queue, queue);
+  await d.onDeleted();
 });

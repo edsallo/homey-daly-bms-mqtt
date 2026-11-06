@@ -1,12 +1,13 @@
 {
   "name": "com.daly.bms",
-  "version": "1.1.3",
+  "version": "1.1.17",
   "dependencies": {
     "mqtt": "4.3.7"
   },
   "description": "Daly BMS MQTT monitor for Homey Pro",
   "main": "app.js",
   "scripts": {
+    "postinstall": "node scripts/trim-dependencies.js",
     "test": "node --test tests/*.test.js"
   },
   "engines": {

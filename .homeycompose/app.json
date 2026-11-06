@@ -1,6 +1,6 @@
 {
   "id": "com.daly.bms",
-  "version": "1.1.3",
+  "version": "1.1.17",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "name": {
@@ -22,10 +22,10 @@
   "platforms": [
     "local"
   ],
-  "brandColor": "#C62828",
+  "brandColor": "#1260F5",
   "images": {
-    "small": "/assets/images/small.png",
-    "large": "/assets/images/large.png",
-    "xlarge": "/assets/images/xlarge.png"
+    "small": "/assets/images/small.jpg",
+    "large": "/assets/images/large.jpg",
+    "xlarge": "/assets/images/xlarge.jpg"
   }
 }

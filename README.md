@@ -2,7 +2,9 @@
 
 **English** · [Русская инструкция](README.ru.md)
 
-Local, read-only Daly BMS monitoring over MQTT. Version **1.1.3**, Homey SDK 3. No battery control commands are provided.
+Local, read-only Daly BMS monitoring over MQTT. Version **1.1.17**, Homey SDK 3. No battery control commands are provided.
+
+Version 1.1.17 includes updated product images and blue branding, MQTT backpressure and reduced redundant availability writes. Installation automatically moves unused browser builds, type declarations and source maps from known dependency versions to a temporary backup; Node/TLS runtime code and licenses are retained. No global Node.js/Homey CLI reinstall is needed for an update. Source PNG and JPG variants are retained; only active JPG images are included in the Homey package.
 
 ## What this app is for
 

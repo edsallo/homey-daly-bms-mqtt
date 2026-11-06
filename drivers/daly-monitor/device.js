@@ -1,7 +1,8 @@
 'use strict';
 
 const Homey = require('homey');
-const mqtt = require('mqtt');
+// Avoid loading MQTT.js CLI-only unique-ID allocator (and its tree container).
+const mqtt = require('mqtt/lib/connect');
 const { TOPICS, parseValue, validateSettings, dynamicMetric } = require('../../lib/telemetry');
 const driverManifest = require('../../app.json').drivers.find(driver => driver.id === 'daly-monitor');
 
@@ -28,17 +29,30 @@ module.exports = class DalyBMSDevice extends Homey.Device {
       if (id !== 'measure_status' && id !== 'bms_failure') options.preventInsights ??= false;
       await this.setCapabilityOptions(id, options);
     }
-    await this.setUnavailable(this.homey.__('errors.connecting'));
-    this.homey.on('unload', () => this.disconnectMQTT());
+    await this.markUnavailable(this.homey.__('errors.connecting'));
+    this._onUnload = () => this.disconnectMQTT();
+    this.homey.on('unload', this._onUnload);
     try {
       this.connectMQTT(validateSettings(this.getSettings()));
     } catch (err) {
-      await this.setUnavailable(this.homey.__('errors.' + err.message));
+      await this.markUnavailable(this.homey.__('errors.' + err.message));
     }
   }
 
   async updateIfChanged(id, value) {
     if (this.getCapabilityValue(id) !== value) await this.setCapabilityValue(id, value);
+  }
+
+  async markAvailable() {
+    if (this._availability === true) return;
+    await this.setAvailable();
+    this._availability = true;
+  }
+
+  async markUnavailable(reason) {
+    if (this._availability === reason) return;
+    await this.setUnavailable(reason);
+    this._availability = reason;
   }
 
   connectMQTT(settings) {
@@ -60,7 +74,7 @@ module.exports = class DalyBMSDevice extends Homey.Device {
       client.subscribe(settings.mqttTopic + '/#', { qos: 0 }, (err, granted) => {
         if (!current()) return;
         if (err || !granted || granted.some(item => item.qos === 128)) {
-          this.setUnavailable(this.homey.__('errors.subscription')).catch(error => this.error(error));
+          this.markUnavailable(this.homey.__('errors.subscription')).catch(error => this.error(error));
         }
         // Available is set only after valid BMS telemetry, not just a broker connection.
       });
@@ -68,6 +82,7 @@ module.exports = class DalyBMSDevice extends Homey.Device {
     client.on('message', (topic, message, packet) => {
       if (!current() || !topic.startsWith(settings.mqttTopic + '/')) return;
       const key = topic.slice(settings.mqttTopic.length + 1);
+      if (!TOPICS[key] && key !== 'Pack_Status' && key !== 'Pack_Failure' && !dynamicMetric(key)) return;
       this._queue = this._queue.then(async () => {
         if (!current()) return;
         const accepted = await this.handleTelemetry(key, message);
@@ -75,20 +90,23 @@ module.exports = class DalyBMSDevice extends Homey.Device {
         // Retained values are useful for the UI but do not prove a live BMS.
         if (!packet?.retain) {
           this._lastTelemetry = Date.now();
-          if (!this._offline) await this.setAvailable();
+          if (!this._offline) await this.markAvailable();
         }
       }).catch(err => this.error('Telemetry update failed', err));
     });
+    // MQTT.js supports backpressure here: do not accept another packet until
+    // Homey finished updating the previous one. No coalescing or alarm loss.
+    client.handleMessage = (_packet, done) => this._queue.then(() => done(), done);
     client.on('error', () => {
-      if (current()) this.setUnavailable(this.homey.__('errors.connection')).catch(err => this.error(err));
+      if (current()) this.markUnavailable(this.homey.__('errors.connection')).catch(err => this.error(err));
     });
     client.on('close', () => {
-      if (current()) this.setUnavailable(this.homey.__('errors.disconnected')).catch(err => this.error(err));
+      if (current()) this.markUnavailable(this.homey.__('errors.disconnected')).catch(err => this.error(err));
     });
     if (settings.telemetryTimeout > 0) {
       this._timer = this.homey.setInterval(() => {
         if (current() && Date.now() - this._lastTelemetry > settings.telemetryTimeout * 1000) {
-          this.setUnavailable(this.homey.__('errors.stale')).catch(err => this.error(err));
+          this.markUnavailable(this.homey.__('errors.stale')).catch(err => this.error(err));
         }
       }, 10000);
     }
@@ -102,7 +120,7 @@ module.exports = class DalyBMSDevice extends Homey.Device {
       const code = { stationary: 0, idle: 0, charge: 1, charging: 1, discharge: 2, discharging: 2, offline: 3 }[text.toLowerCase()] ?? 4;
       await this.updateIfChanged('measure_status_code', code);
       this._offline = code === 3;
-      if (this._offline) await this.setUnavailable(this.homey.__('errors.bms_offline'));
+      if (this._offline) await this.markUnavailable(this.homey.__('errors.bms_offline'));
       return true;
     }
     if (topic === 'Pack_Failure') {
@@ -152,12 +170,13 @@ module.exports = class DalyBMSDevice extends Homey.Device {
     catch (err) { throw new Error(this.homey.__('errors.' + err.message)); }
     this.disconnectMQTT();
     await this._queue;
-    await this.setUnavailable(this.homey.__('errors.connecting'));
+    await this.markUnavailable(this.homey.__('errors.connecting'));
     this.connectMQTT(settings);
   }
 
   async onDeleted() {
     this._stopped = true;
+    if (this._onUnload) this.homey.removeListener?.('unload', this._onUnload);
     this.disconnectMQTT();
     await this._queue;
   }

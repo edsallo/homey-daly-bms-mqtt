@@ -10,3 +10,12 @@ test/
 tests/
 coverage/
 .homeybuild
+README.md
+README.ru.md
+assets/images/README.md
+pnpm-lock.yaml
+drivers/daly-monitor/views/
+app.html
+scripts/
+assets/images/*.png
+drivers/daly-monitor/assets/images/*.png
