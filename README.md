@@ -4,6 +4,27 @@
 
 Local, read-only Daly BMS monitoring over MQTT. Version **1.1.3**, Homey SDK 3. No battery control commands are provided.
 
+## What this app is for
+
+It brings battery charge, voltage, current, temperature and cell readings into Homey. You can view their history in Insights and use the available readings/alarms in Flows, for example to notify you of low charge. It does not replace the BMS or its safety protections.
+
+The data path is: **Daly BMS → compatible ESP with BMS firmware → Wi-Fi/MQTT broker → this Homey app**. These are separate components: installing the Homey app does not flash the ESP or create a broker.
+
+## ESP firmware and its paid license
+
+The firmware is a separate project by **softwarecrash / All-Solutions**, not part of this Homey app:
+
+- [Daly2MQTT project and wiring instructions](https://github.com/softwarecrash/Daly2MQTT).
+- [100Daly2MQTT for 100Balance and newer Daly H/K/M/S series](https://github.com/softwarecrash/100Daly2MQTT). Choose by the author's compatibility instructions, not just the BMS case colour or current rating.
+- [Author's web flasher](https://flash.2mqtt.de/), linked from the firmware project. Use a supported ESP board; the original Daly2MQTT recommends ESP8266/Wemos D1 Mini. Do not assume every ESP32 is compatible.
+- [Firmware license from All-Solutions](https://all-solutions.store/en/store/license/).
+
+**Full firmware functionality requires the author's paid license where the firmware's licensing applies (explicitly documented for 100Daly2MQTT).** It unlocks additional detailed data/features. Purchase and activate it according to the author's instructions. The license is tied to the BMS, not this Homey app. A purchased adapter may include a license entitlement; check your order before paying again. Price and conditions are set by the firmware author.
+
+This Homey app has no additional license fee. It only displays the MQTT data your firmware actually publishes; it cannot unlock restricted ESP features. Its compatibility depends on the individual-topic format described below, not merely on purchasing a firmware license.
+
+Before wiring anything, read the author's diagram and warnings: old Bluetooth and newer Wi-Fi/Bluetooth dongles can have different pinouts and supply voltages. Do not reuse their cables blindly. Choose classic individual MQTT topics, not JSON-only `Pack_Data`, for this app. Then configure Wi-Fi, the broker and base topic in the ESP firmware before adding the device to Homey.
+
 ## What you need
 
 - Homey Pro with firmware **12.0.0 or newer**, an Athom account allowed to install apps, and a Mac or Windows computer.
