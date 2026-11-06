@@ -1,77 +1,145 @@
-# Daly BMS for Homey Pro / Daly BMS для Homey Pro
+# Daly BMS for Homey Pro
 
-Local, read-only MQTT monitoring of Daly BMS telemetry. Version 1.1.3, Homey SDK 3.
-Локальный мониторинг Daly BMS через MQTT. Версия 1.1.3, Homey SDK 3.
+**English** · [Русская инструкция](README.ru.md)
 
-## Установка и обновление
+Local, read-only Daly BMS monitoring over MQTT. Version **1.1.3**, Homey SDK 3. No battery control commands are provided.
 
-1. Установите Node.js и Homey CLI: `npm install -g homey`.
-2. В папке приложения: `npm install --omit=dev`.
-3. Выполните `homey login`, выберите Homey и установите: `homey app install`.
-4. Не используйте `--clean`: обычная установка сохраняет устройства и Flow.
-5. При добавлении укажите IP/имя брокера, порт, базовый MQTT-топик и при необходимости учётные данные. Для TLS включите переключатель и задайте порт брокера (обычно 8883).
+## What you need
 
-Идентификатор приложения остаётся `com.daly.bms`, драйвера — `daly-monitor`. Новые capabilities и настройки Insights добавляются уже подключённым устройствам автоматически. Старые идентификаторы и внутренние store-ключи сохранены. Пароль не выводится в журнал.
+- Homey Pro with firmware **12.0.0 or newer**, an Athom account allowed to install apps, and a Mac or Windows computer.
+- Homey and your computer must be able to communicate on the network. Internet access is needed during installation.
+- A working MQTT broker already receiving Daly2MQTT telemetry. This app does not install a broker or connect directly to your BMS via Bluetooth.
+- Your broker address, port, base topic and optional username/password, taken from your actual MQTT/Daly2MQTT configuration.
 
-## Параметры и Insights
+This is a manual source-code installation, not an App Store app. Opening the ZIP on your phone will not install it. The computer is only needed for installation; afterwards the app runs on Homey.
 
-История включена для основных числовых и логических параметров:
-напряжение, ток со знаком, мощность, SOC, остаток Ah/kWh, температуры BMS/MOS,
-дельта ячеек, ток балансировки, зарядный и разрядный FET, суммарные Ah заряда/разряда,
-циклы, напряжения минимальной и максимальной ячейки,
-балансировка, Wi-Fi RSSI, сигналы низкого заряда и ошибки BMS.
+## 1. Install Node.js
 
-Напряжения `Pack_Cells_Voltage/Cell_N` (1–48) и температуры
-`Pack_Cell_Temperature_N` (1–16) создаются по мере поступления, с отдельными графиками.
-Если прошивка не публикует показатель, он остаётся без значения: приложение его не выдумывает.
+1. Download an **LTS installer** for your operating system from [nodejs.org](https://nodejs.org/en/download).
+2. Run it and follow the prompts. On Windows, keep the option to add Node.js to PATH enabled.
+3. Open a new terminal: **Mac:** Command + Space → type `Terminal` → Enter. **Windows:** Start → type `cmd` → open Command Prompt.
+4. Run these commands separately, pressing Enter after each:
 
-Текстовые статус и описание ошибок остаются доступны в карточке и тегах.
-Числовой параметр «Режим BMS» означает: 0 — покой, 1 — заряд, 2 — разряд, 3 — offline,
-4 — неизвестный режим. Текст ошибок сопровождается логическим `alarm_generic`.
-С версии 1.1.2 запись в Insights отключена для heartbeat, числового режима,
-числа ячеек, номеров минимальной/максимальной ячейки, реле и ручного режима реле.
-Эти параметры остаются в карточке и Flow. График Wi-Fi сохранён.
-История новых параметров начинается после обновления; прошлые значения из MQTT восстановить нельзя.
+   ```sh
+   node --version
+   ```
 
-Порог `alarm_battery` задаётся в настройках (по умолчанию 20%).
-Тайм-аут свежих данных — 300 секунд; 0 отключает проверку. Сохранённые retained-сообщения
-обновляют значения, но сами по себе не доказывают, что BMS доступна сейчас.
+   ```sh
+   npm --version
+   ```
 
-## MQTT
+Both should display a version number. If a command is not found, reopen the terminal and check the Node.js installation.
 
-Топики — `<base>/<parameter>`, например `BMS01/Pack_Voltage`.
-Поддерживаются индивидуальные топики Daly2MQTT; JSON `Pack_Data` не обрабатывается.
-В приложении нет команд управления FET или реле и нет заявленного ранее HTTP API.
+## 2. Install Homey CLI
 
-## Installation and upgrade
+Homey CLI is the tool that uploads the app from your computer to Homey. Run:
 
-Install Node.js and Homey CLI (`npm install -g homey`), then run
-`npm install --omit=dev`, `homey login`, and `homey app install` from this folder.
-Use a normal install, without `--clean`, to preserve paired devices and Flows.
-Enter the MQTT broker hostname/IP, port, base topic, and optional credentials during pairing.
-TLS is optional; choose the corresponding broker port explicitly.
+```sh
+npm install -g homey
+```
 
-Core numeric and boolean readings have Insights enabled, including FET states,
-charge/discharge Ah counters, cycles, cell extrema, balancing states and signal strength.
-Individual cell voltages and temperature probes are discovered from incoming topics.
-Existing devices are migrated automatically. No historical data can be backfilled.
+Wait until the command finishes and you can type again. Check:
 
-The raw textual status is preserved. Its companion numeric mode parameter uses:
-0 stationary, 1 charge, 2 discharge, 3 offline, 4 unknown.
-Text error messages have a companion boolean alarm. Unsupported/unpublished fields stay empty.
-Since 1.1.2, heartbeat, numeric mode, cell count, min/max cell indices, relay and manual
-relay mode are excluded from Insights but remain available on the device and in Flow.
-Wi-Fi signal history is retained.
-Signed current is preserved (older versions incorrectly applied an absolute value).
+```sh
+homey --version
+```
 
-Low-battery threshold defaults to 20%; telemetry timeout defaults to 300 seconds
-(0 disables it). Retained MQTT values do not count as a live heartbeat.
-Only individual MQTT topics are supported; no HTTP API or BMS control commands are exposed.
+For permission errors, do not change system permissions or add `sudo` blindly. Follow the [official setup guide](https://apps.developer.homey.app/the-basics/getting-started), which also describes using a Node version manager.
 
-## Verification
+## 3. Download and extract the app
 
-`node --test tests/*.test.js`
+1. Open [this repository](https://github.com/edsallo/homey-daly-bms-mqtt), select **main**, then **Code → Download ZIP**.
+2. Extract the ZIP. **Windows:** right-click → **Extract All**. **Mac:** double-click it.
+3. Open the extracted folder. It must contain `app.json`, `package.json` and `drivers`. Use this folder, not the ZIP or its parent folder.
 
-`homey app validate`
+Alternatively, choose **Source code (zip)** in a [release](https://github.com/edsallo/homey-daly-bms-mqtt/releases/latest). Releases are fixed snapshots; `main` includes the latest repository changes.
 
-Protocol reference: [Daly2MQTT source](https://github.com/softwarecrash/Daly2MQTT).
+## 4. Open the app folder in your terminal
+
+**Mac:** type `cd `, including the space, drag the extracted folder from Finder into Terminal, then press Enter. Its path is inserted automatically.
+
+**Windows:** open the extracted folder in File Explorer, click its address bar, type `cmd`, then press Enter.
+
+Check the folder contents: run `ls` on Mac or `dir` on Windows. You should see `app.json` and `package.json`.
+
+## 5. Install on Homey
+
+Run each command separately and wait for it to finish before continuing.
+
+1. Download the app's required libraries:
+
+   ```sh
+   npm install --omit=dev
+   ```
+
+2. Sign in:
+
+   ```sh
+   homey login
+   ```
+
+   A browser page opens. Sign in using the Athom account that manages your Homey and approve the requested login. Return to the terminal after success. If no page opens, follow the URL printed by the command.
+
+3. Select your Homey:
+
+   ```sh
+   homey select
+   ```
+
+   If a list appears, use the arrow keys and Enter to choose the correct Homey.
+
+4. Upload the app:
+
+   ```sh
+   homey app install
+   ```
+
+   Wait for the successful installation message. If an error appears, installation is not complete; keep the error text for troubleshooting.
+
+Do **not** use `--clean`: it can remove existing app devices and settings. Use `homey app install`, not `homey app run`, which is intended for temporary development sessions. You may close the terminal after a successful installation. Docker is not needed for this install-only workflow.
+
+## 6. Add your battery in Homey
+
+Open the Homey mobile app → select your Homey → **Devices → + → Daly BMS** → select the Daly BMS device. Fill in the connection form:
+
+| Field | Value |
+|---|---|
+| Name | Any name you choose, such as “Battery” |
+| Broker | Your MQTT server IP or hostname, without `mqtt://` or `http://` |
+| Port | Your broker port; commonly `1883` without TLS or `8883` with TLS |
+| Base topic | The exact Daly2MQTT base topic, such as `BMS01`, without `/#` |
+| Username/password | Broker credentials; leave blank only if your broker allows it |
+| TLS | Enable only if your broker supports TLS; enter its matching port separately |
+
+Tap the add button and wait for readings. Homey needs network access to the broker. Example: a topic `BMS01/Pack_Voltage` means the base topic is `BMS01`. Any example IP is only a placeholder, not a value to copy blindly.
+
+## Updating
+
+Download and extract the newer version, open its folder in a terminal, then run `npm install --omit=dev`, `homey select`, and `homey app install` separately. Use `homey login` first if needed. Do not uninstall the old app or use `--clean`. Existing devices and Flows should be preserved; new capabilities are added automatically.
+
+## Troubleshooting
+
+- **`node`/`npm` not found:** complete Step 1 and reopen the terminal.
+- **`homey` not found:** complete Step 2 and reopen the terminal.
+- **`package.json` not found:** you are in the wrong folder; repeat Step 4.
+- **Homey not listed:** check your Athom account, permissions and Homey's network connection.
+- **No readings:** check broker address, port, credentials, TLS and topic. Daly2MQTT must already publish live data; this app does not create the data source.
+- **Some values are blank:** your firmware must publish those values; missing data is not invented.
+- **Empty Insights:** history starts when new readings arrive; past MQTT values cannot backfill charts.
+
+## Telemetry and Insights
+
+History includes voltage, signed current, power, SOC, remaining Ah/kWh, BMS/MOS temperatures, cell delta, balancing current, FET states, charge/discharge Ah counters, cycles, cell extrema, balancing, Wi-Fi RSSI and alarms. Individual cell voltages (1–48) and temperature probes (1–16) are discovered from incoming topics.
+
+Heartbeat, numeric mode, cell count, min/max cell indices, relay and manual relay mode remain available on the device/in Flow but are excluded from Insights. Wi-Fi history is retained. Numeric mode: 0 stationary, 1 charge, 2 discharge, 3 offline, 4 unknown.
+
+Low-battery threshold: 20% by default. Fresh-data timeout: 300 seconds; 0 disables the check. Retained MQTT readings do not prove the BMS is live. Only individual `<base>/<parameter>` topics are supported; JSON `Pack_Data` is not processed. No HTTP API or BMS control commands. App ID: `com.daly.bms`; driver: `daly-monitor`. Passwords are not logged.
+
+## Developer checks
+
+```sh
+node --test tests/*.test.js
+homey app validate
+```
+
+[Official Homey CLI documentation](https://apps.developer.homey.app/the-basics/getting-started/homey-cli) · [Daly2MQTT protocol source](https://github.com/softwarecrash/Daly2MQTT)
